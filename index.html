@@ -2,191 +2,274 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Debajo RP</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debajo RP | ULTRA</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Orbitron', sans-serif;
-    background: black;
-    color: white;
-    overflow-x: hidden;
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+background:#050505;
+color:white;
+overflow-x:hidden;
 }
 
-/* FONDO ANIMADO */
-.hero {
-    height: 100vh;
-    background: linear-gradient(rgba(0,0,0,0.85), black),
-    url('https://images.unsplash.com/photo-1605902711622-cfb43c4437d1');
-    background-size: cover;
-    background-position: center;
-    animation: zoom 20s infinite alternate;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center; 
+/* LOADER */
+#loader{
+position:fixed;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+flex-direction:column;
 }
 
-@keyframes zoom {
-    from { background-size: 100%; }
-    to { background-size: 120%; }
+#loader h1{
+color:red;
+animation:pulse 1s infinite;
 }
 
-/* TITULO */
-.hero h1 {
-    font-size: 80px;
-    color: red;
-    text-shadow: 0 0 30px red;
+@keyframes pulse{
+0%{opacity:0.3;}
+50%{opacity:1;}
+100%{opacity:0.3;}
 }
 
-.hero p {
-    font-size: 22px;
-    opacity: 0.8;
+/* PARTICLES */
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
 }
 
-/* BOTONES */
-.buttons {
-    margin-top: 30px;
+/* NAV */
+nav{
+position:fixed;
+width:100%;
+display:flex;
+justify-content:space-between;
+padding:20px 50px;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+z-index:1000;
 }
 
-.btn {
-    padding: 18px 40px;
-    margin: 10px;
-    border: none;
-    font-size: 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
+nav h1{color:red;}
+
+nav a{
+margin-left:20px;
+color:white;
+text-decoration:none;
 }
 
-.btn:hover {
-    transform: scale(1.1);
+/* HERO */
+.hero{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
 }
 
-/* BOTONES ESTILO */
-.play {
-    background: linear-gradient(45deg, red, darkred);
-    color: white;
+.hero h2{
+font-size:70px;
+text-shadow:0 0 30px red;
 }
 
-.discord {
-    background: #5865F2;
-    color: white;
+.btn{
+margin-top:20px;
+padding:15px 40px;
+background:red;
+border:none;
+cursor:pointer;
+transition:0.3s;
 }
 
-/* STATS */
-.stats {
-    display: flex;
-    justify-content: center;
-    gap: 80px;
-    padding: 70px;
-    background: #050505;
+.btn:hover{background:darkred;}
+
+/* DISCORD LOGIN */
+.login{
+margin-top:20px;
+background:#5865F2;
 }
 
-.stat h2 {
-    font-size: 45px;
-    color: red;
+/* CARDS */
+.section{
+padding:100px 20px;
+text-align:center;
 }
 
-/* FEATURES */
-.features {
-    padding: 70px;
-    text-align: center;
+.cards{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+justify-content:center;
 }
 
-.feature-box {
-    display: inline-block;
-    width: 260px;
-    margin: 20px;
-    padding: 30px;
-    background: #111;
-    border-radius: 15px;
-    transition: 0.3s;
+.card{
+background:#111;
+padding:30px;
+width:250px;
+border-radius:15px;
+transition:0.3s;
 }
 
-.feature-box:hover {
-    transform: translateY(-15px) scale(1.05);
-    background: #1a1a1a;
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 20px red;
 }
 
-/* FOOTER */
-.footer {
-    text-align: center;
-    padding: 30px;
-    background: black;
-    opacity: 0.6;
+/* TIENDA */
+.shop{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+justify-content:center;
+}
+
+.product{
+background:#111;
+padding:25px;
+border-radius:15px;
+width:220px;
+}
+
+footer{
+padding:30px;
+text-align:center;
+opacity:0.5;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<div class="hero">
-    <h1>DEBAJO RP</h1>
-    <p>Una ciudad. Mil historias. Tu decides.</p>
-
-    <div class="buttons">
-        <button class="btn play" onclick="connect()">🎮 Conectar</button>
-        <button class="btn discord" onclick="discord()">💬 Discord</button>
-    </div>
+<div id="loader">
+<h1>CARGANDO DEBAJO RP...</h1>
 </div>
 
-<!-- STATS -->
-<div class="stats">
-    <div class="stat">
-        <h2 id="players">0</h2>
-        <p>Jugadores Online</p>
-    </div>
-    <div class="stat">
-        <h2>24/7</h2>
-        <p>Servidor Activo</p>
-    </div>
-    <div class="stat">
-        <h2>+100</h2>
-        <p>Sistemas Únicos</p>
-    </div>
+<canvas id="particles"></canvas>
+
+<nav>
+<h1>DEBAJO RP</h1>
+<div>
+<a href="#">Inicio</a>
+<a href="#server">Servidor</a>
+<a href="#shop">Tienda</a>
+</div>
+</nav>
+
+<section class="hero">
+<div>
+<h2>DEBAJO RP</h2>
+<p>Roleplay de otro nivel</p>
+
+<button class="btn" onclick="join()">ENTRAR</button>
+<button class="btn login" onclick="discordLogin()">LOGIN DISCORD</button>
+</div>
+</section>
+
+<section id="server" class="section">
+<h2>SERVIDOR</h2>
+<div class="cards">
+<div class="card">Sistema ilegal avanzado</div>
+<div class="card">Trabajos únicos</div>
+<div class="card">Economía real</div>
+<div class="card">Eventos activos</div>
+</div>
+</section>
+
+<section id="shop" class="section">
+<h2>TIENDA VIP</h2>
+<div class="shop">
+<div class="product">
+<h3>VIP BRONCE</h3>
+<p>$5</p>
+<button class="btn" onclick="buy('Bronce')">Comprar</button>
 </div>
 
-<!-- FEATURES -->
-<div class="features">
-    <h2>¿Qué ofrece Debajo RP?</h2>
-
-    <div class="feature-box">💼 Economía realista</div>
-    <div class="feature-box">🏠 Propiedades</div>
-    <div class="feature-box">🔫 Sistema de bandas</div>
-    <div class="feature-box">🚓 Policía & EMS</div>
-    <div class="feature-box">🎰 Eventos y casinos</div>
+<div class="product">
+<h3>VIP PLATA</h3>
+<p>$10</p>
+<button class="btn" onclick="buy('Plata')">Comprar</button>
 </div>
 
-<!-- FOOTER -->
-<div class="footer">
-    © 2026 Debajo RP — Todos los derechos reservados
+<div class="product">
+<h3>VIP ORO</h3>
+<p>$20</p>
+<button class="btn" onclick="buy('Oro')">Comprar</button>
 </div>
+</div>
+</section>
+
+<footer>
+© 2026 Debajo RP
+</footer>
 
 <script>
 
-/* CONTADOR ANIMADO */
-let count = 0;
-setInterval(() => {
-    if(count < 245){
-        count++;
-        document.getElementById("players").innerText = count;
-    }
-}, 20);
-
-/* BOTON CONECTAR (CAMBIAR IP) */
-function connect(){
-    window.location.href = "fivem://connect/TU_IP_AQUI";
+// LOADER
+window.onload = () =>{
+setTimeout(()=>{
+document.getElementById("loader").style.display="none";
+},2000);
 }
 
-/* DISCORD */
-function discord(){
-    window.open("https://discord.gg/TU_INVITACION");
+// ENTRAR SERVIDOR
+function join(){
+window.location.href="fivem://connect/TU_IP";
 }
+
+// LOGIN DISCORD (SIMULADO)
+function discordLogin(){
+alert("Aquí conectas Discord OAuth real");
+}
+
+// COMPRA
+function buy(rank){
+alert("Compraste VIP "+rank);
+}
+
+// PARTICLES
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+
+for(let i=0;i<80;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2
+});
+}
+
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+particles.forEach(p=>{
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fillStyle="red";
+ctx.fill();
+
+p.y+=0.3;
+if(p.y>canvas.height)p.y=0;
+});
+
+requestAnimationFrame(draw);
+}
+
+draw();
 
 </script>
 
